@@ -8,26 +8,6 @@ class DatabaseHelper {
   static final _databaseName = "local.db";
   static final _databaseVersion = 1;
 
-  static final _tableUsers = "users";
-  static final _colID = "id";
-  static final _colEmail = "email";
-  static final _colPassword = "password";
-  static final _colContact = "contact";
-
-  static final _tableForms = "forms";
-  static final _colTitle = "title";
-  static final _colLink = "link";
-  static final _colParticipants = "participants";
-  static final _colPrivacy = "privacy";
-
-  static final _tableQuestion = "questions";
-  static final _colFormID= "form_id";
-  static final _colType = "type";
-
-  static final _tableAnswers = "answers";
-  static final _colQuestionID = "question_id";
-  static final _colAnswer = "answer";
-
   DatabaseHelper._privateConstructor();
   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
 
@@ -44,41 +24,59 @@ class DatabaseHelper {
 
   Future _onCreate(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE $_tableUsers (
-        $_colID INTEGER PRIMARY KEY,
-        $_colEmail TEXT NOT NULL,
-        $_colPassword TEXT NOT NULL,
-        $_colContact TEXT NOT NULL
+      CREATE TABLE users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        email TEXT NOT NULL,
+        password TEXT NOT NULL,
+        name TEXT NOT NULL,
+        contact TEXT NOT NULL
       );
     ''');
 
     await db.execute('''
-      CREATE TABLE $_tableForms (
-        $_colID INTEGER PRIMARY KEY,
-        $_colFormID TEXT NOT NULL,
-        $_colTitle TEXT NOT NULL,
-        $_colLink TEXT NOT NULL,
-        $_colParticipants INTEGER NOT NULL,
-        $_colPrivacy INTEGER NOT NULL
+      CREATE TABLE forms (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        ref_code TEXT NOT NULL,
+        title TEXT NOT NULL,
+        description TEXT NOT NULL,
+        link TEXT NOT NULL,
+        participants INTEGER NULL,
+        deadline TEXT NULL,
+        privacy INTEGER NOT NULL
       );
     ''');
 
     await db.execute('''
-      CREATE TABLE $_tableQuestion (
-        $_colID INTEGER PRIMARY KEY,
-        $_colTitle INTEGER NOT NULL,
-        $_colType INTEGER NOT NULL
+      CREATE TABLE questions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        ref_code TEXT NOT NULL,
+        form_id INTEGER NOT NULL,
+        text INTEGER NOT NULL,
+        type INTEGER NOT NULL
       );
     ''');
 
     await db.execute('''
-      CREATE TABLE $_tableAnswers (
-        $_colID INTEGER PRIMARY KEY,
-        $_colQuestionID INTEGER NOT NULL,
-        $_colType INTEGER NOT NULL,
-        $_colAnswer TEXT NULL
+      CREATE TABLE options (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        ref_code TEXT NOT NULL,
+        question_id INTEGER NOT NULL,
+        text TEXT NULL,
+        type INTEGER NOT NULL
       );
     ''');
+
+    await db.execute('''
+      CREATE TABLE responses (
+        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+        ref_code TEXT NOT NULL,
+        form_id INTEGER NOT NULL,
+        date TEXT NOT NULL,
+        email TEXT NULL,
+        asnwer TEXT NOT NULL
+      );
+    ''');
+    
   }
 
   Future<List<Map<String, dynamic>>> search(table, query, arguments) async {

@@ -1,7 +1,7 @@
-import 'package:agos/helpers/database_helper.dart';
 import 'package:agos/views/pages/create.dart';
 import 'package:agos/views/pages/dashboard.dart';
 import 'package:agos/views/pages/list.dart';
+import 'package:agos/views/pages/people.dart';
 import 'package:agos/views/pages/published.dart';
 import 'package:agos/widgets/drawer/drawer_item.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +11,9 @@ class HomePage extends StatefulWidget {
   final drawerItems = [
     new DrawerItem("Dashboard", Icons.dashboard),
     new DrawerItem("Create Form", Icons.article),
-    new DrawerItem("List Form", Icons.article_outlined),
-    new DrawerItem("Published Form", Icons.assignment_turned_in)
+    new DrawerItem("Published", Icons.article_outlined),
+    new DrawerItem("Responses", Icons.assignment_turned_in),
+    new DrawerItem("People", Icons.people)
   ];
 
   @override
@@ -20,7 +21,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _dbHelper = DatabaseHelper.instance;
   int _selectedDrawerIndex = 0;
   String _title = "Dashboard";
 
@@ -34,6 +34,8 @@ class _HomePageState extends State<HomePage> {
         return new ListPage();
       case 3:
         return new PublishedPage();
+      case 4:
+        return new PeoplePage();
       default:
         return new Text("Error");
     }

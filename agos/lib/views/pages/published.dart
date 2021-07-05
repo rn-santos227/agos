@@ -1,4 +1,3 @@
-import 'package:agos/helpers/database_helper.dart';
 import 'package:flutter/material.dart';
 
 class PublishedPage extends StatefulWidget {
@@ -9,7 +8,6 @@ class PublishedPage extends StatefulWidget {
 }
 
 class _PublishedPageState extends State<PublishedPage> {
-  final _dbHelper = DatabaseHelper.instance;
 
   @override
   Widget build(BuildContext context) {

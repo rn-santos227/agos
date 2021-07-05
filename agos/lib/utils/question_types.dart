@@ -1,6 +1,8 @@
-var question_types = {
-  "text",
-  "radio",
-  "checkbox",
-  "dropdown"
-};
+enum QuestionTypes {
+  text,
+  parahraph,
+  choice,
+  multiple,
+  dropdown,
+  linear_scale
+}

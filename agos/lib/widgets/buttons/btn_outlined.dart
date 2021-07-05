@@ -21,15 +21,7 @@ class ButtonOutlinedDecorative extends StatelessWidget {
       child: SizedBox(
           height: 50.0,
           width: double.infinity,   
-          child: OutlinedButton(   
-            style: ButtonStyle(
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                  side: BorderSide(color: Colors.red)
-                )
-              )
-            ),    
+          child: OutlinedButton(      
             child: Stack(
               children: <Widget>[
                 Align(

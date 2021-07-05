@@ -21,14 +21,7 @@ class ButtonDecorative extends StatelessWidget {
       child: SizedBox(
           height: 50.0,
           width: double.infinity,   
-          child: ElevatedButton(   
-            style: ButtonStyle(
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                )
-              )
-            ),    
+          child: ElevatedButton(     
             child: Stack(
               children: <Widget>[
                 Align(
